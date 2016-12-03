@@ -18,13 +18,25 @@ func index(w http.ResponseWriter, r *http.Request) {
 			w.Write([]byte(index_template))
 		}
 		if r.URL.Path != "/" {
+			var ext string
 			router := strings.Split(r.URL.Path, "/")
 			last := router[len(router)-1]
-			ext := strings.Split(last, ".")[1]
+			ext_split := strings.Split(last, ".")
+			if len(ext_split) > 1 {
+				ext = strings.Split(last, ".")[1]
+			} else {
+				ext = ""
+			}
 			if ext == "js" {
-				js_file, _ := ioutil.ReadFile(pwd + r.URL.Path)
-				w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
-				w.Write([]byte(js_file))
+				js_file, err := ioutil.ReadFile(pwd + r.URL.Path)
+				if err != nil {
+					http.NotFound(w, r)
+				} else {
+					w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
+					w.Write([]byte(js_file))
+				}
+			} else {
+				http.NotFound(w, r)
 			}
 		}
 	}
