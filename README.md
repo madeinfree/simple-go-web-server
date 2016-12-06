@@ -47,7 +47,7 @@ and copy below script paste in your js file
 
 ```javascript
 setInterval(() => {
-  fetch('http://localhost:300/simple-go-server-file-change').then((r) => {
+  fetch('http://localhost:3000/simple-go-server-file-change').then((r) => {
     r.json().then((rr) => {
       if (rr) {
         fetch('http://localhost:3000//simple-go-server-file-callback?isOK=true', {

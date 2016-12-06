@@ -20,7 +20,7 @@ const PackageFlagWarning string = "Warning [Simple Go Server]"
 
 type options struct {
 	Port    string `short:"p" long:"port" description:"listen port setting"`
-	Content string `short:"c" long:"content" description:"content base path setting" required:"true"`
+	Content string `short:"c" long:"content" description:"content base path setting"`
 	Hot     bool   `long:"hot" description:"automatically to watch your change file"`
 }
 
